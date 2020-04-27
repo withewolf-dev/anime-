@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import axios from 'axios'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       title:[]
+    }
+  }
+
+  async componentDidMount(){
+
+    let arr = []
+    axios.get(`https://api.jikan.moe/v3/anime/1/episodes`).then(res=> res.data).then(titles=>{
+      this.setState({
+        title:titles
+      })
+    })
+  }
+  render() {
+    return (
+      <div>
+        <h1>Api testing here...</h1>
+      
+      </div>
+    )
+  }
 }
 
-export default App;
+
+
+
+
+
+
+// import React from 'react'
+// import {Switch,Route} from 'react-router-dom'
+// import AnimeSearch from './AnimeSearch'
+// import urlDisplay from './urlDisplay'
+//  function App() {
+//   return (
+//     <div>
+//      <AnimeSearch/>
+//      <urlDisplay/>
+//       <Route
+//         exact path='/search/:name'
+//         render ={(routeProps)=> <AnimeSearch 
+//         query={routeProps.match.params.name}/>}
+//       />
+//     </div>
+//   )
+// }
+// export default App
